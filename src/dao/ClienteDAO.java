@@ -1,6 +1,7 @@
 package dao;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -11,6 +12,7 @@ import entidades.Cliente;
 import entidades.Pedido;
 import model.ClienteVO;
 import model.PedidoVO;
+import utilitarios.CalculadoraTotal;
 import utilitarios.FabricaConexao;
 import utilitarios.GeradorID;
 
@@ -24,21 +26,23 @@ public class ClienteDAO {
 		// utiliza um objeto de transferência (VO)
 		Cliente c = new Cliente();
 		c.setId(GeradorID.geraNumeroID());
-		c.setNome(vo.getNome());
-		c.setEndereco(vo.getEndereco());
 		vo.setId(c.getId()); // repassa o ID para o VO
+
+		c.setNome(vo.getNome());
+		c.setEndereco(vo.getEndereco());		
 
 		// trata os objetos de pedidos (formato "vo" para entity)
 		List<PedidoVO> pedidosVO = vo.getPedidos();
 		List<Pedido> pedidosEntity = new ArrayList<Pedido>();
-		for (PedidoVO voPed : pedidosVO) {
+		for (PedidoVO Ped : pedidosVO) {
 			Pedido novoPedido = new Pedido();
 			// o "id" é criado em Pedido()
-			novoPedido.setData(voPed.getData());
-			novoPedido.setNomeProduto(voPed.getNomeProduto());
-			novoPedido.setQuantidade(voPed.getQuantidade());
-			novoPedido.setValorTotal(voPed.getValorTotal());
+			novoPedido.setData(Ped.getData());
+			novoPedido.setPreco(Ped.getPreco());
+			novoPedido.setQuantidade(Ped.getQuantidade());
+			novoPedido.setPrecoTotal(Ped.getPrecoTotal());
 			pedidosEntity.add(novoPedido);
+			System.out.println("Sessão criada " + Ped.getPrecoTotal());
 		}
 		c.setPedidos(pedidosEntity);
 
@@ -81,13 +85,13 @@ public class ClienteDAO {
 		// trata os objetos de pedidos (formato "vo" para entity)
 		List<PedidoVO> pedidosVO = vo.getPedidos();
 		List<Pedido> pedidosEntity = new ArrayList<Pedido>();
-		for (PedidoVO voPed : pedidosVO) {
+		for (PedidoVO ped : pedidosVO) {
 			Pedido novoPedido = new Pedido();
 			// o "id" é criado em Pedido()
-			novoPedido.setData(voPed.getData());
-			novoPedido.setNomeProduto(voPed.getNomeProduto());
-			novoPedido.setQuantidade(voPed.getQuantidade());
-			novoPedido.setValorTotal(voPed.getValorTotal());
+			novoPedido.setData(ped.getData());
+			novoPedido.setPreco(ped.getPreco());
+			novoPedido.setQuantidade(ped.getQuantidade());
+			novoPedido.setPrecoTotal(ped.getPrecoTotal());
 			pedidosEntity.add(novoPedido);
 		}
 		c.setPedidos(pedidosEntity);

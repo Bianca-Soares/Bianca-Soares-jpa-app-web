@@ -12,21 +12,27 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "tb_cliente")
 public class Cliente implements Serializable {
-	@Id	private Integer id;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	@Id
+	private Integer id;
 	private String nome;
- 
-    private String endereco;
-	
+	private String endereco;
+	private double valorTotal;
+
 	@OneToMany
 	private List<Pedido> pedidos = new ArrayList<Pedido>();
 
-	public Cliente() {}
+	public Cliente() {
+	}
 
 	// metodo para adicionar um novo produto à lista de pedidos
-	public void  addPedido(Pedido umPedido) {
+	public void addPedido(Pedido umPedido) {
 		this.pedidos.add(umPedido);
 	}
-	 
+
 	// getters e setters
 	public Integer getId() {
 		return id;
@@ -60,4 +66,13 @@ public class Cliente implements Serializable {
 		this.pedidos = pedidos;
 	}
 
+	public double getValorTotal() {
+		return valorTotal;
+	}
+
+	public void setValorTotal(double valorTotal) {
+		this.valorTotal = valorTotal;
+	}
+    
+	
 }

@@ -10,8 +10,11 @@ import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
 import dao.ClienteDAO;
+import dao.PedidoDAO;
 import entidades.Cliente;
+import entidades.Pedido;
 import model.ClienteVO;
+import utilitarios.CalculadoraTotal;
 
 @Named 
 @SessionScoped
@@ -20,6 +23,7 @@ public class ClienteMB implements Serializable {
 	private List<ClienteVO> clientes;
 	 
 	static ClienteDAO dao = new ClienteDAO();
+	static PedidoDAO dao2 = new PedidoDAO();
 	
 	public ClienteMB() {}
  	
@@ -84,8 +88,8 @@ public class ClienteMB implements Serializable {
 	public String update(String id) {
 		int idPK = Integer.parseInt(id);		 
 	    Cliente cli = dao.findById(idPK);
-	    this.cliente.setEndereco(cli.getEndereco());
 	    this.cliente.setId(cli.getId());
+	    this.cliente.setEndereco(cli.getEndereco());
 	    this.cliente.setNome(cli.getNome());
 	    return "";
 	}
@@ -106,6 +110,7 @@ public class ClienteMB implements Serializable {
 			vo.setEndereco(cliente.getEndereco());
 			vo.setId(cliente.getId());
 			vo.setNome(cliente.getNome());
+			vo.setValorTotal(cliente.getValorTotal()) ;
 			this.clientes.add(vo);	
 		}		
 		return this.clientes;
@@ -113,6 +118,27 @@ public class ClienteMB implements Serializable {
 
 	public void setClientes(List<ClienteVO> clientes) {
 		this.clientes = clientes;
+	}
+	
+    public Integer pegaId(String id) {
+    	int idPK = Integer.parseInt(id);
+    	Pedido ped = dao2.findById(idPK);
+		return ped.getId();
+	}
+ 	public String pagCliente() {	 
+
+		return "cadastro-cliente";
+
+	}
+
+	public void atualizarTotal(Integer id, double valorNovo) {	 
+				 
+			Cliente cli = dao.findById(id);
+
+			double valorAtual =  cli.getValorTotal() + valorNovo;
+
+			cli.setValorTotal( valorAtual);
+			
 	}
  
 }

@@ -1,45 +1,46 @@
 package entidades;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Date;
-import java.util.Random;
 
-import javax.inject.Inject;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
-
 import utilitarios.GeradorID;
 
 @Entity
 @Table(name = "tb_pedido")
 public class Pedido implements Serializable  {
 	  
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id private Integer id;
 	
 	@Temporal(TemporalType.TIMESTAMP)  // DATE - retorna apenas a data 
 	private Date data;
 	
-	private String nomeProduto;
+	private Double preco;
 	private Integer quantidade;
+	private Integer idCliente;
 
-	@Column(name = "valor_total", precision=18, scale=2)
-	private BigDecimal valorTotal;
+	@Column(name = "preco_total", precision=18, scale=2)
+	private Double precoTotal;
 
 	public Pedido() {
 	  // cria uma chave numérica única (ID)	
-	  this.id =	GeradorID.geraNumeroID(); 
+	  this.id =	GeradorID.geraNumeroID();
 	}
 
 	// getters e setters
 	public Integer getId() {
 		return id;
-	}
+		}
 
 	public void setId(Integer id) {
 		this.id = id;
@@ -53,12 +54,12 @@ public class Pedido implements Serializable  {
 		this.data = data;
 	}
 
-	public String getNomeProduto() {
-		return nomeProduto;
+	public Double getPreco() {
+		return preco;
 	}
 
-	public void setNomeProduto(String nomeProduto) {
-		this.nomeProduto = nomeProduto;
+	public void setPreco(Double preco) {
+		this.preco = preco;
 	}
 
 	public Integer getQuantidade() {
@@ -69,13 +70,22 @@ public class Pedido implements Serializable  {
 		this.quantidade = quantidade;
 	}
 
-	public BigDecimal getValorTotal() {
-		return valorTotal;
+	public Integer getIdCliente() {
+		return idCliente;
 	}
 
-	public void setValorTotal(BigDecimal valorTotal) {
-		this.valorTotal = valorTotal;
+	public void setIdCliente(Integer idCliente) {
+		this.idCliente = idCliente;
 	}
+	
+	public Double getPrecoTotal() {
+		return precoTotal;
+	}
+
+	public void setPrecoTotal(Double double1) {
+		this.precoTotal = double1;
+	}
+	
 
 
 }

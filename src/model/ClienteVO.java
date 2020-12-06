@@ -5,9 +5,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ClienteVO implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private String nome;
 	private String endereco;
+	private double valorTotal;
 	private List<PedidoVO> pedidos = new ArrayList<PedidoVO>();
 	 
 	public ClienteVO() {}
@@ -41,8 +46,16 @@ public class ClienteVO implements Serializable {
 	public void setPedidos(List<PedidoVO> pedidos) {
 		this.pedidos = pedidos;
 	}
-	 
-	 
+	
+
+	public double getValorTotal() {
+		return valorTotal;
+	}
+
+	public void setValorTotal(double valorTotal) {
+		this.valorTotal = valorTotal;
+	}
+
 	@Override
 	public String toString() {
 		return "ClienteVO [id=" + id  + " ,"

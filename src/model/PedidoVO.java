@@ -1,26 +1,15 @@
 package model;
 
-
-import java.math.BigDecimal;
 import java.util.Date;
-import java.util.Random;
 
-import javax.inject.Inject;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.persistence.Transient;
-
-import utilitarios.GeradorID;
- 
 public class PedidoVO   {
     private Integer id;
 	private Date data;
-	private String nomeProduto;
+	private Double preco;
 	private Integer quantidade;
-	private BigDecimal valorTotal;
+	private Integer idCliente;
+	private Double precoTotal;
+	
 
 	public PedidoVO() {
 	}
@@ -42,12 +31,12 @@ public class PedidoVO   {
 		this.data = data;
 	}
 
-	public String getNomeProduto() {
-		return nomeProduto;
+	public Double getPreco() {
+		return preco;
 	}
 
-	public void setNomeProduto(String nomeProduto) {
-		this.nomeProduto = nomeProduto;
+	public void setPreco(Double preco) {
+		this.preco = preco;
 	}
 
 	public Integer getQuantidade() {
@@ -58,13 +47,23 @@ public class PedidoVO   {
 		this.quantidade = quantidade;
 	}
 
-	public BigDecimal getValorTotal() {
-		return valorTotal;
+	public Integer getIdCliente() {
+		return idCliente;
+	}
+	public Double getPrecoTotal() {
+		return precoTotal;
 	}
 
-	public void setValorTotal(BigDecimal valorTotal) {
-		this.valorTotal = valorTotal;
+	public void setPrecoTotal(Double precoTotal) {
+		
+		this.precoTotal = precoTotal;
 	}
+
+	public void setIdCliente(Integer idCliente) {
+		// TODO Auto-generated method stub
+		this.idCliente = idCliente;
+	}
+
 
 
 }

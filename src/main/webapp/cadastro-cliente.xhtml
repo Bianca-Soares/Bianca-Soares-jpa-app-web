@@ -5,45 +5,40 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
-	<title>Testes JPA+JSF</title>
+	<title>Cliente</title>
 </h:head>
 <h:body>
-    <h1><p:outputLabel id="titulo" value="Cadastro de Clientes"/> </h1>
 
-	<h:form id="formulario">
-    	<p:panel id="panel" header="Cadastro">
-	        <p:focus context="panel"/>
+	<p:panel id="basic" header="Dados pessoais" >
+	<h:panelGrid columns="2" cellpadding="10">
 
-			<p:commandButton id="btnovo" value="Novo Cliente" 
-			     update="formulario" ajax="true" 
-			     action="#{clienteMB.novoCliente}" />
-					
-			<h:panelGrid id="dados" columns="2">
-			    <p:outputLabel for="input-nome" value="Nome:" />
-				<p:inputText id="input-nome" label="Nome" value="#{clienteMB.cliente.nome}"
-			        	required="true" maxlength="60" size="60" />
-			    
-			    <p:outputLabel for="input-end" value="Endereço:" />
-				<p:inputText id="input-end" label="Endereco" value="#{clienteMB.cliente.endereco}"
-			       	size="100"	maxlength="100" required="true" />
-			       	
-			</h:panelGrid>
-			
-			<h:commandButton id="salvar" value="Salvar"
-				action="#{clienteMB.salvar}" />
-			
-			<p:messages />
-			
-			<p:growl id="msgs" showDetail="true" skipDetailIfEqualsSummary="true" />
-			
-		</p:panel>
+		<h:form id="formulario"  style="  >
+		<p:outputLabel for="input-nome" value="Nome:" />
+		<p:inputText id="input-nome" label="Nome" value="#{clienteMB.cliente.nome}"
+				required="true" maxlength="60" size="60" />
+	    
+		<p></p>
+		<p:outputLabel for="input-end" value="Endereço:" />
+		<p:inputText id="input-end" label="Endereco" value="#{clienteMB.cliente.endereco}"
+			   size="60"	maxlength="90" required="true" />
+		<p></p>
+		<h:commandButton id="salvar" value="Comfirmar"
+			   action="#{clienteMB.salvar}" />
+		   
+		   <p:messages />
+		   
+		   <p:growl id="msgs" showDetail="true" skipDetailIfEqualsSummary="true" />	   		
+		
 	</h:form>
+	
+	</h:panelGrid> 
+</p:panel>
       
-     <h2><p:outputLabel id="titulo-lista" value="Lista de Clientes"/> </h2>
+     <h2><p:outputLabel id="titulo-lista" value="Lista de Clientes" /> </h2>
      
      <h:form>
      <p:dataTable id="clientesList" var="cli" value="#{clienteMB.clientes}"  
-        rows="6" paginator="true" >
+        rows="6" paginator="true">
 	     <p:column headerText="Id">
 	        <h:outputText value="#{cli.id}" />
 	     </p:column>	 
@@ -52,7 +47,11 @@
 	    </p:column>
  		<p:column headerText="Endereço">
 	        <h:outputText value="#{cli.endereco}" />
-	    </p:column>	    
+		</p:column>
+		<p:column headerText="Valor dos pedidos">
+	        <h:outputText value="#{cli.valorTotal}" />
+		</p:column>
+     
 	    <p:column headerText="Operações">
            <p:commandButton update="formulario" 
                         value="Alterar" icon="fa-edit"
@@ -65,6 +64,10 @@
                         ajax="true" styleClass="ui-priority-primary">
               <p:confirm header="Confirmação" message="Confirma a exclusão?" icon="pi pi-exclamation-triangle" />
            </p:commandButton>
+           <p:commandButton
+					action="#{pedidoMB.idCliente(cli.id)}" value="Fazer Pedido" icon="fa-edit" >
+			</p:commandButton>
+
 		</p:column>		        
      </p:dataTable>
      

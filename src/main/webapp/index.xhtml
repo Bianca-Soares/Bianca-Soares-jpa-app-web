@@ -5,22 +5,13 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
-	<title>Testes JPA+JSF</title>
+	<title>Inicio</title>
 </h:head>
 <h:body>
-    <h1><p:outputLabel id="titulo" value="Cadastro de Clientes"/> </h1>
 
-	<h:form id="formulario">
-    	<p:panel id="panel" header="Sistema de Cadastro">
-            
-       	 <p:link outcome="cadastro-cliente" value="Cadastro de Clientes">
-             <f:param name="cliID" value="10" />
-         </p:link>
-			
-			<p:messages />
-			
-		</p:panel>
-	</h:form>
+	<p:linkButton outcome="cadastro-cliente" value="Add cliente">
+        <f:param name="productId" value="10" />
+    </p:linkButton>
 
 </h:body>
 </html>
